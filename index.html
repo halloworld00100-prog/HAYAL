@@ -1,245 +1,379 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عطور فاخرة | تابعونا</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f6efed" id="theme-color">
+    <meta name="description" content="عطرٌ يعبّر عنك، وحضورٌ يروي حكايتك. اكتشف عالم HAYAL ORGANIC وتواصل معنا لاختيار عطرك والاستفسار والطلب.">
+    <title>HAYAL.ORGANIC — CARE FOR YOU</title>
+    <link rel="icon" href="logo.jpeg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        // Apply the saved preference before paint; the page also works without storage.
+        (() => {
+            let preference;
+            try { preference = localStorage.getItem('hayal-theme'); } catch (_) {}
+            const theme = preference === 'light' || preference === 'dark'
+                ? preference
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+            document.getElementById('theme-color').content = theme === 'dark' ? '#111010' : '#f6efed';
+        })();
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            color-scheme: light;
+            --background: #f6efed;
+            --surface: #fff8f5;
+            --ink: #201b1a;
+            --muted: #6b615a;
+            --gold: #87642b;
+            --gold-soft: #b69a60;
+            --line: #dfd8cd;
+            --red: #681e2c;
+            --red-hover: #4e1420;
+            --button-ink: #fff8ed;
+            --focus: #87642b;
+            --art-background: #e8d5cb;
+            --art-ink: #521c27;
+            --art-shade: #faf0e8e6;
         }
-
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            --background: #111010;
+            --surface: #191615;
+            --ink: #f5eee3;
+            --muted: #b9ada1;
+            --gold: #d4b375;
+            --gold-soft: #9c8050;
+            --line: #37302a;
+            --red: #832d40;
+            --red-hover: #9b3a50;
+            --button-ink: #fff8ed;
+            --focus: #e4c48a;
+            --art-background: #271315;
+            --art-ink: #ead6b1;
+            --art-shade: #160a0dbb;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Amiri', 'Scheherazade', 'Traditional Arabic', serif;
-            background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 25%, #5c2a00 50%, #3d1a00 75%, #1a0a00 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
+            margin: 0; min-width: 280px; background: var(--background); color: var(--ink);
+            position: relative; isolation: isolate;
+            font-family: 'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color .3s, color .3s;
         }
-
-        /* زخرفة الخلفية */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
-            pointer-events: none;
+        body::before { content: ''; display: block; height: 3px; background: var(--gold-soft); }
+        body::after {
+            content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image: url('assets/perfume-pattern.svg'); background-size: 200px 210px;
+            opacity: .12;
+            mask-image: linear-gradient(90deg, #000, #0009 30%, #0009 70%, #000);
         }
-
-        .container {
-            background: linear-gradient(145deg, #2a1500, #1a0a00);
-            border: 3px solid #c9a84c;
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow:
-                0 0 30px rgba(201, 168, 76, 0.3),
-                inset 0 0 30px rgba(201, 168, 76, 0.05);
-            position: relative;
+        [data-theme="dark"] body::after { opacity: .18; filter: brightness(1.8); }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 6px; }
+        ::selection { background: var(--red); color: #fff; }
+        .shell { width: min(1080px, calc(100% - 80px)); margin-inline: auto; }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
         }
-
-        /* الزخرفة العلوية */
-        .container::before {
-            content: '✦';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a0a00;
-            color: #c9a84c;
-            font-size: 24px;
-            padding: 0 15px;
+        .skip-link {
+            position: absolute; top: 12px; right: 20px; z-index: 20;
+            padding: 10px 18px; background: var(--surface); transform: translateY(-200%);
         }
-
-        /* الزخرفة السفلية */
-        .container::after {
-            content: '✦';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a0a00;
-            color: #c9a84c;
-            font-size: 24px;
-            padding: 0 15px;
+        .skip-link:focus { transform: translateY(0); }
+        .icon { width: 22px; height: 22px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .masthead {
+            min-height: 156px; display: grid; grid-template-columns: 1fr auto 1fr;
+            align-items: center; gap: 20px; border-bottom: 1px solid var(--line);
         }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            border: 2px solid #c9a84c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            background: radial-gradient(circle, #3d1a00, #1a0a00);
-            box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+        .masthead-note { color: var(--muted); font-size: 12px; letter-spacing: .02em; }
+        .masthead-note span { display: block; text-align: right; color: var(--gold); margin-top: 2px; font-size: 11px; letter-spacing: .15em; }
+        .brand { display: flex; flex-direction: column; align-items: center; padding-block: 21px 18px; }
+        .brand-logo { display: block; width: 196px; height: 85px; object-fit: contain; }
+        .brand-tagline { color: var(--gold); margin: 5px 0 0; font-family: Georgia, 'Times New Roman', serif; font-size: 9px; letter-spacing: .32em; }
+        .theme-toggle {
+            justify-self: end; display: inline-flex; align-items: center; justify-content: center;
+            gap: 9px; min-height: 44px; padding: 8px 12px; color: var(--muted);
+            border: 1px solid var(--line); background: transparent; border-radius: 2px;
+            cursor: pointer; font-size: 12px; transition: color .2s, border-color .2s;
         }
-
-        h1 {
-            color: #c9a84c;
-            font-size: 32px;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        .theme-toggle[hidden] { display: none; }
+        .theme-toggle:hover { color: var(--gold); border-color: var(--gold-soft); }
+        .theme-toggle .icon { width: 17px; height: 17px; }
+        .sun-icon, [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: block; }
+        .hero {
+            display: grid; grid-template-columns: 1.08fr 1fr; gap: 72px;
+            align-items: center; padding-block: 54px 56px;
         }
-
-        .subtitle {
-            color: #d4b896;
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-style: italic;
+        .hero-copy { padding-block: 8px; animation: arrive .8s ease both; }
+        h1 { font-family: 'Noto Naskh Arabic', 'Traditional Arabic', Georgia, serif; font-weight: 400; font-size: clamp(36px, 4.3vw, 54px); line-height: 1.5; margin: 0 0 17px; }
+        h1 span { display: block; }
+        h1 .accent { color: var(--gold); }
+        .hero-description { max-width: 400px; color: var(--muted); font-size: 15px; line-height: 2.1; margin: 0 0 27px; }
+        .latin { font-family: Arial, sans-serif; font-size: .86em; letter-spacing: .06em; }
+        .primary-link {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            min-height: 60px; padding: 14px 20px; background: var(--red); color: var(--button-ink);
+            border: 1px solid transparent; font-size: 14px; transition: background .2s, transform .2s;
         }
-
-        .divider {
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-            margin: 20px auto;
+        .primary-link:hover { background: var(--red-hover); transform: translateY(-2px); }
+        .primary-label { display: inline-flex; align-items: center; gap: 12px; }
+        .primary-link .arrow { width: 19px; height: 19px; }
+        .contact-note { display: flex; gap: 8px; align-items: center; font-size: 11px; color: var(--muted); margin: 12px 0 0; }
+        .contact-note::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-soft); }
+        .hero-art { position: relative; margin: 0; height: 465px; background: var(--art-background); overflow: hidden; animation: arrive 1s .1s ease both; }
+        .hero-art picture { display: block; height: 100%; }
+        .hero-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .hero-art::after { content: ''; position: absolute; inset: 12px; border: 1px solid #d4b37555; pointer-events: none; }
+        .art-caption {
+            position: absolute; bottom: 0; right: 0; left: 0; color: var(--art-ink); padding: 44px 29px 27px;
+            background: linear-gradient(transparent, var(--art-shade)); display: flex; justify-content: space-between; align-items: end; gap: 15px;
         }
-
-        .welcome-text {
-            color: #e0cda8;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.8;
+        .art-caption span:first-child { font-family: 'Noto Naskh Arabic', 'Traditional Arabic', serif; font-size: 20px; }
+        .art-caption .art-label { font-size: 11px; }
+        .connect { border-top: 1px solid var(--line); padding-block: 31px 36px; }
+        .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+        h2 { margin: 0; font-family: 'Noto Naskh Arabic', 'Traditional Arabic', serif; font-size: 27px; font-weight: 400; }
+        .section-heading p { margin: 0; color: var(--muted); font-size: 12px; }
+        .channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .channel {
+            display: flex; align-items: center; gap: 14px; padding: 18px 17px;
+            min-height: 85px; border: 1px solid var(--line); background: var(--surface);
+            transition: border-color .2s, transform .2s, background-color .3s;
         }
-
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .link-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 15px 20px;
-            border: 1px solid #c9a84c;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #e0cda8;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            background: linear-gradient(145deg, rgba(61, 26, 0, 0.8), rgba(26, 10, 0, 0.8));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link-button:hover {
-            background: linear-gradient(145deg, #c9a84c, #a08030);
-            color: #1a0a00;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(201, 168, 76, 0.4);
-        }
-
-        .link-button .icon {
-            font-size: 24px;
-            width: 30px;
-        }
-
+        .channel:hover { border-color: var(--gold-soft); transform: translateY(-3px); }
+        .channel > .icon { color: var(--gold); width: 24px; height: 24px; }
+        .channel-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .channel-title { font-size: 14px; font-weight: 500; }
+        .channel-detail { font-family: Arial, sans-serif; font-size: 10px; color: var(--muted); letter-spacing: .03em; }
+        .channel .arrow { color: var(--gold-soft); width: 16px; height: 16px; margin-inline-start: auto; }
+        .brand-thought { text-align: center; border-top: 1px solid var(--line); padding: 36px 20px 37px; }
+        .thought-mark { display: block; width: 25px; height: 1px; background: var(--gold-soft); margin: 0 auto 17px; }
+        .brand-thought h2 { color: var(--gold); font-size: 28px; margin-bottom: 9px; }
+        .brand-thought p { margin: 0 auto; max-width: 600px; font-size: 13px; line-height: 2; color: var(--muted); }
         .footer {
-            margin-top: 30px;
-            color: #8a6d3b;
-            font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center; gap: 20px;
+            padding-block: 23px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px;
         }
-
-        .footer a {
-            color: #c9a84c;
-            text-decoration: none;
+        .footer-location { display: inline-flex; align-items: center; gap: 7px; }
+        .footer .icon { width: 14px; height: 14px; color: var(--gold); }
+        .footer-email { direction: ltr; font-family: Arial, sans-serif; font-size: 11px; overflow-wrap: anywhere; min-height: 44px; display: inline-flex; align-items: center; padding-block: 8px; }
+        .footer-email:hover { color: var(--gold); }
+        .footer-brand { font-family: Georgia, serif; font-size: 9px; letter-spacing: .12em; }
+        @keyframes arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        @media (min-width: 901px) {
+            .masthead-note { font-size: 14px; }
+            .masthead-note span { font-size: 12px; }
+            .brand-tagline { font-size: 14px; letter-spacing: .28em; }
+            .theme-toggle { font-size: 14px; }
+            .hero-description { font-size: 17px; }
+            .primary-link { font-size: 16px; }
+            .contact-note { font-size: 13px; }
+            .art-caption span:first-child { font-size: 22px; }
+            .art-caption .art-label { font-size: 13px; }
+            .section-heading p { font-size: 14px; }
+            .channel-title { font-size: 16px; }
+            .channel-detail { font-size: 12px; }
+            .brand-thought p { font-size: 15px; }
+            .footer, .footer-email { font-size: 13px; }
+            .footer-brand { font-size: 11px; }
         }
-
-        /* للشاشات الصغيرة */
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 26px;
-            }
-
-            .link-button {
-                font-size: 16px;
-                padding: 12px 15px;
-            }
+        @media (min-width: 1440px) { .shell { width: 1120px; } .hero { gap: 86px; } .hero-art { height: 490px; } }
+        @media (max-width: 900px) {
+            .shell { width: calc(100% - 48px); }
+            .hero { gap: 35px; padding-block: 38px 42px; }
+            .hero-art { height: 430px; }
+            h1 { font-size: 39px; }
+            .primary-link { padding-inline: 15px; font-size: 12px; }
+            .channels { gap: 12px; }
+            .channel { padding: 16px 12px; gap: 10px; }
+        }
+        @media (max-width: 640px) {
+            .shell { width: calc(100% - 40px); max-width: 480px; }
+            .masthead { grid-template-columns: 1fr auto 1fr; min-height: 136px; gap: 8px; }
+            .brand { padding-block: 17px; }
+            .brand-logo { width: 164px; height: 76px; }
+            .brand-tagline { font-size: 8px; letter-spacing: .27em; }
+            .masthead-note { font-size: 10px; }
+            .masthead-note span { display: none; }
+            .theme-toggle { width: 42px; padding: 9px; border: 0; }
+            .theme-label { display: none; }
+            .hero { grid-template-columns: 1fr; gap: 28px; padding-block: 30px 30px; }
+            .hero-copy { padding: 0; }
+            h1 { font-size: clamp(32px, 8.3vw, 41px); line-height: 1.5; margin-bottom: 12px; }
+            .hero-description { font-size: 13px; line-height: 2; max-width: none; margin-bottom: 21px; }
+            .primary-link { font-size: 13px; padding-inline: 17px; min-height: 58px; }
+            .contact-note { font-size: 10px; margin-top: 9px; }
+            .hero-art { height: 220px; }
+            .hero-art img { object-position: center 53%; }
+            .art-caption { padding: 35px 25px 23px; }
+            .art-caption span:first-child { font-size: 20px; }
+            .connect { padding-block: 25px 27px; }
+            .section-heading { margin-bottom: 15px; gap: 10px; }
+            .section-heading h2 { font-size: 25px; }
+            .section-heading p { font-size: 10px; }
+            .channels { grid-template-columns: 1fr; gap: 10px; }
+            .channel { min-height: 72px; padding: 14px 17px; gap: 16px; }
+            .channel-title { font-size: 14px; }
+            .channel-detail { font-size: 11px; }
+            .brand-thought { padding: 28px 4px 29px; }
+            .brand-thought h2 { font-size: 27px; }
+            .brand-thought p { font-size: 12px; }
+            .footer { flex-wrap: wrap; justify-content: center; gap: 5px 20px; padding-block: 17px 22px; }
+            .footer-brand { width: 100%; text-align: center; order: 3; margin-top: 8px; }
+        }
+        @media (max-width: 360px) {
+            .shell { width: calc(100% - 30px); }
+            .masthead-note { font-size: 9px; }
+            .brand-logo { width: 130px; height: 68px; }
+            .section-heading { align-items: flex-start; flex-direction: column; gap: 3px; }
+            .primary-link { font-size: 12px; gap: 8px; padding-inline: 13px; }
+            .primary-label { gap: 9px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+        @media print {
+            .theme-toggle, .hero-art, .skip-link { display: none; }
+            .shell { width: 100%; }
+            .hero { display: block; }
+            body { background: #fff; color: #111; }
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="logo">🌹</div>
+    <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
+    <svg class="sr-only" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+            <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></symbol>
+            <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.5L3 21l1.6-4.9a8.5 8.5 0 1 1 15.9-4.3Z"/><path d="m8.4 7.6 1.4 2.5-1 1.2c.8 1.7 2 2.8 3.8 3.6l1.2-1 2.6 1.3c-.3 1.6-1.2 2.2-2.7 1.9-3.6-.7-6.4-3.5-7.1-7.1-.3-1.4.3-2.2 1.8-2.4Z"/></symbol>
+            <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01" stroke-width="3"/></symbol>
+            <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M14.5 21v-8h3l.5-4h-3.5V7c0-1.2.4-2 2-2H19V1.5A24 24 0 0 0 16 1c-3 0-5 1.8-5 5v3H8v4h3v8"/></symbol>
+            <symbol id="icon-phone" viewBox="0 0 24 24"><path d="m5 3 4 1 1 4-2.5 2a14 14 0 0 0 6.5 6.5l2-2.5 4 1 1 4c0 1.1-1 2-2.2 2C9.4 20.4 3.6 14.6 3 5.2 3 4 3.9 3 5 3Z"/></symbol>
+            <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        </defs>
+    </svg>
 
-        <h1>HAYAL.ORGANIC</h1>
-        <p class="subtitle">Perfume House | بارفيم إيفي</p>
+    <header class="masthead shell">
+        <div class="masthead-note">عالمٌ من العطر<span lang="en" dir="ltr">HAYAL.ORGANIC</span></div>
+        <a class="brand" href="#main" aria-label="HAYAL.ORGANIC — الصفحة الرئيسية">
+            <img class="brand-logo" src="assets/hayal-logo.svg" alt="HAYAL ORGANIC" width="168" height="85" fetchpriority="high">
+            <p class="brand-tagline" lang="en" dir="ltr">CARE FOR YOU</p>
+        </a>
+        <button class="theme-toggle" type="button" aria-label="تبديل المظهر" aria-pressed="false" title="تفعيل المظهر الداكن" hidden>
+            <svg class="icon moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.7 8.7 0 0 1 10.8 3.5a8.7 8.7 0 1 0 9.7 9.7Z"/></svg>
+            <svg class="icon sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+            <span class="theme-label">المظهر</span>
+            <span class="sr-only theme-status"></span>
+        </button>
+    </header>
 
-        <div class="divider"></div>
+    <main class="shell" id="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <h1 id="hero-title"><span>عطرٌ يعبّر عنك.</span><span class="accent">وحضورٌ يروي حكايتك.</span></h1>
+                <p class="hero-description">اكتشف عالم <bdi class="latin" lang="en">HAYAL ORGANIC</bdi>، وتواصل معنا لاختيار العطر الأقرب إلى ذوقك، أو للاستفسار والطلب.</p>
+                <a class="primary-link" href="https://wa.me/963962681190" target="_blank" rel="noopener noreferrer" aria-label="للطلب والاستفسار عبر واتساب — يفتح في نافذة جديدة">
+                    <span class="primary-label"><svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg>للطلب والاستفسار عبر واتساب</span>
+                    <svg class="icon arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                </a>
+                <p class="contact-note">نساعدك في اختيار ما يليق بك</p>
+            </div>
+            <figure class="hero-art">
+                <picture>
+                    <source class="hero-dark-source" srcset="assets/fragrance-atmosphere.webp" media="(prefers-color-scheme: dark)">
+                    <script>
+                        document.querySelector('.hero-dark-source').media =
+                            document.documentElement.dataset.theme === 'dark' ? 'all' : 'not all';
+                    </script>
+                    <img src="assets/fragrance-atmosphere-light.webp" alt="" width="1120" height="1400" fetchpriority="high">
+                </picture>
+                <figcaption class="art-caption"><span>أثرٌ يبقى في الذاكرة</span><span class="art-label">فنّ العطر</span></figcaption>
+            </figure>
+        </section>
 
-        <p class="welcome-text">
-            أهلاً وسهلاً بكم في عالم العطور الفاخرة<br>
-            تابعونا على منصات التواصل الاجتماعي<br>
-            للاطلاع على أحدث العطور والعروض الحصرية
-        </p>
+        <section class="connect" aria-labelledby="connect-title">
+            <div class="section-heading">
+                <h2 id="connect-title">ابقَ قريبًا</h2>
+                <p>تابع عالمنا على إنستغرام وفيسبوك.</p>
+            </div>
+            <div class="channels">
+                <a class="channel" href="https://www.instagram.com/hayal.organic?igsi=MTAwZzR2OW93d2NrOQ==" target="_blank" rel="noopener noreferrer" aria-label="تابع HAYAL.ORGANIC على إنستغرام — يفتح في نافذة جديدة">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg>
+                    <span class="channel-text"><span class="channel-title">إنستغرام</span><span class="channel-detail" lang="en" dir="ltr">@hayal.organic</span></span>
+                    <svg class="icon arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                </a>
+                <a class="channel" href="https://www.facebook.com/share/1EF9qx31WD/" target="_blank" rel="noopener noreferrer" aria-label="تابعنا على فيسبوك — يفتح في نافذة جديدة">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-facebook"/></svg>
+                    <span class="channel-text"><span class="channel-title">فيسبوك</span><span class="channel-detail" lang="en" dir="ltr">HAYAL.ORGANIC</span></span>
+                    <svg class="icon arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                </a>
+                <a class="channel" href="tel:+963962681190" aria-label="اتصل بنا على الرقم +963 962 681 190">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-phone"/></svg>
+                    <span class="channel-text"><span class="channel-title">اتصل بنا</span><span class="channel-detail" dir="ltr">+963 962 681 190</span></span>
+                    <svg class="icon arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                </a>
+            </div>
+        </section>
 
-        <div class="links-container">
-            <a href="https://www.instagram.com/hayal.organic?igsi=MTAwZzR2OW93d2NrOQ==" class="link-button"
-                target="_blank">
-                <span class="icon">📸</span>
-                انستغرام | Instagram
-            </a>
+        <section class="brand-thought" aria-labelledby="thought-title">
+            <span class="thought-mark" aria-hidden="true"></span>
+            <h2 id="thought-title">لكلّ حضور حكاية</h2>
+            <p>نؤمن أن اختيار العطر لحظة شخصية؛ امتدادٌ لذوقك، وتعبيرٌ عنك دون كلمات.</p>
+        </section>
+    </main>
 
-            <a href="https://wa.me/963962681190" class="link-button" target="_blank">
-                <span class="icon">💬</span>
-                واتساب | WhatsApp
-            </a>
+    <footer class="footer shell">
+        <span class="footer-location"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg>إسطنبول، تركيا</span>
+        <span class="footer-brand" lang="en" dir="ltr">HAYAL.ORGANIC © <span id="year">2026</span></span>
+        <a class="footer-email" href="mailto:adhamkodimaty@gmail.com" aria-label="راسلنا عبر البريد الإلكتروني: adhamkodimaty@gmail.com">adhamkodimaty@gmail.com</a>
+    </footer>
 
-            <a href="https://tiktok.com/@yourusername" class="link-button" target="_blank">
-                <span class="icon">🎵</span>
-                تيك توك | TikTok
-            </a>
+    <script>
+        (() => {
+            const root = document.documentElement;
+            const toggle = document.querySelector('.theme-toggle');
+            const status = document.querySelector('.theme-status');
+            const color = document.getElementById('theme-color');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const darkImage = document.querySelector('.hero-dark-source');
+            let manualPreference = false;
+            try { manualPreference = ['light', 'dark'].includes(localStorage.getItem('hayal-theme')); } catch (_) {}
 
-            <a href="https://www.facebook.com/share/1EF9qx31WD/" class="link-button" target="_blank">
-                <span class="icon">👥</span>
-                فيسبوك | Facebook
-            </a>
+            const applyTheme = (theme) => {
+                const dark = theme === 'dark';
+                root.dataset.theme = theme;
+                toggle.setAttribute('aria-pressed', String(dark));
+                toggle.title = dark ? 'تفعيل المظهر الفاتح' : 'تفعيل المظهر الداكن';
+                status.textContent = dark ? 'المظهر الحالي: الداكن' : 'المظهر الحالي: الفاتح';
+                color.content = dark ? '#111010' : '#f6efed';
+                darkImage.media = dark ? 'all' : 'not all';
+            };
 
-            <a href="https://t.me/yourusername" class="link-button" target="_blank">
-                <span class="icon">✈️</span>
-                تيليغرام | Telegram
-            </a>
-
-            <a href="tel:+963962681190" class="link-button"
-                onclick="this.textContent='+963 962 681 190'; this.removeAttribute('href'); return false;">
-                <span class="icon">📞</span>
-                اتصل بنا | Call Us
-            </a>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="footer">
-            <p>📍 اسطنبول - تركيا | Istanbul - Türkiye</p>
-            <p>للتواصل: <a href="mailto:info@yourstore.com">adhamkodimaty@gmail.com</a></p>
-        </div>
-    </div>
+            applyTheme(root.dataset.theme);
+            toggle.hidden = false;
+            toggle.addEventListener('click', () => {
+                const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+                manualPreference = true;
+                applyTheme(next);
+                try { localStorage.setItem('hayal-theme', next); } catch (_) {}
+            });
+            systemTheme.addEventListener('change', (event) => {
+                if (!manualPreference) applyTheme(event.matches ? 'dark' : 'light');
+            });
+            document.getElementById('year').textContent = new Date().getFullYear();
+        })();
+    </script>
 </body>
-
 </html>
